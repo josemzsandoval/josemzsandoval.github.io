@@ -60,8 +60,10 @@ export function CvPage() {
       </section>
 
       <section>
-        <h2>Languages</h2>
-        <p>{profile.languages.map((l) => `${l.name} (${l.level})`).join(', ')}</p>
+        <h2>Languages & International Experience</h2>
+        <p className="skill"><strong>Languages:</strong> {profile.languages.map((l) => `${l.name} (${l.level})`).join(', ')}</p>
+        <p className="skill"><strong>Clients in:</strong> {profile.clientCountries.map((c) => c.name).join(', ')}</p>
+        <p className="skill"><strong>Teams with colleagues from:</strong> {profile.teamCountries.map((c) => c.name).join(', ')}</p>
       </section>
     </article>
   );

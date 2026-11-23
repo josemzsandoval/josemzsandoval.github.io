@@ -173,6 +173,7 @@ export const profile = {
     { code: 'PRT', name: 'Portugal' },
     { code: 'FRA', name: 'France' },
     { code: 'MEX', name: 'Mexico' },
+    { code: 'COL', name: 'Colombia' },
     { code: 'USA', name: 'United States' },
     { code: 'ARE', name: 'United Arab Emirates' },
   ] satisfies Country[],

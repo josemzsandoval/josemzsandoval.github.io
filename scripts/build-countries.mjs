@@ -8,7 +8,7 @@ const SRC = 'https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1
 const OUT = 'src/data/countries.geo.json';
 
 // Match on ADM0_A3: ISO_A3 is "-99" for France in Natural Earth.
-const CODES = ['BRA', 'BOL', 'USA', 'PRT', 'ARE', 'FRA', 'MEX'];
+const CODES = ['BRA', 'BOL', 'USA', 'PRT', 'ARE', 'FRA', 'MEX', 'COL'];
 
 const round = (n) => Math.round(n * 1000) / 1000;
 const roundRing = (ring) => ring.map(([x, y]) => [round(x), round(y)]);
