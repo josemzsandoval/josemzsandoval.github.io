@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { profile } from '../data/profile';
+import { ThemeToggle } from './ThemeToggle';
 
 const links = [
   { id: 'about', label: 'About' },
@@ -55,7 +56,10 @@ export function Nav() {
           </ul>
         </nav>
         <div className="nav-right">
-          <a className="btn btn-primary btn-sm" href={profile.cvPdf} download>Download CV</a>
+          <ThemeToggle />
+          <a className="btn btn-primary btn-sm hide-xs" href={profile.cvPdf} download aria-label="Download CV">
+            <span className="hide-sm">Download&nbsp;</span>CV
+          </a>
           <button
             ref={btnRef}
             type="button"

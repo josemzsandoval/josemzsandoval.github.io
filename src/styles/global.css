@@ -15,11 +15,13 @@
   --sans: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --mono: 'IBM Plex Mono', ui-monospace, 'Cascadia Mono', Consolas, monospace;
   --maxw: 1080px;
+  --map-ctrl-icon: none;
   color-scheme: light;
 }
 
+/* Dark theme: follows the system unless the visitor picked light; an explicit pick always wins. */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme='light']) {
     --bg: #0f1b1e;
     --surface: #152427;
     --surface-2: #1b2e31;
@@ -32,8 +34,26 @@
     --marker-text: #f2994a;
     --hero-scrim: linear-gradient(90deg, rgba(15, 27, 30, 0.97) 0%, rgba(15, 27, 30, 0.94) 54%, rgba(15, 27, 30, 0) 66%);
     --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.25);
+    --map-ctrl-icon: invert(1) hue-rotate(180deg);
     color-scheme: dark;
   }
+}
+
+:root[data-theme='dark'] {
+  --bg: #0f1b1e;
+  --surface: #152427;
+  --surface-2: #1b2e31;
+  --text: #e7eeec;
+  --muted: #9aaba8;
+  --line: #26393c;
+  --accent: #4fc1b5;
+  --accent-ink: #0b1517;
+  --marker: #f2994a;
+  --marker-text: #f2994a;
+  --hero-scrim: linear-gradient(90deg, rgba(15, 27, 30, 0.97) 0%, rgba(15, 27, 30, 0.94) 54%, rgba(15, 27, 30, 0) 66%);
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.25);
+  --map-ctrl-icon: invert(1) hue-rotate(180deg);
+  color-scheme: dark;
 }
 
 *,
@@ -80,7 +100,10 @@ a:hover { text-decoration-thickness: 2px; }
 .nav ul a { color: var(--muted); text-decoration: none; font-size: 15px; }
 .nav ul a:hover { color: var(--text); }
 .nav ul a[aria-current='location'] { color: var(--text); font-weight: 600; box-shadow: inset 0 -2px 0 var(--accent); padding-bottom: 4px; }
-.nav-right { display: flex; align-items: center; gap: 8px; }
+.nav-right { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+.nav-right > * { flex-shrink: 0; white-space: nowrap; }
+@media (max-width: 420px) { .hide-sm { display: none; } }
+@media (max-width: 360px) { .nav-right > .hide-xs { display: none; } } /* hero has its own Download CV button */
 .nav .menu-btn { display: none; }
 @media (max-width: 720px) {
   .nav ul { display: none; }
@@ -217,3 +240,23 @@ footer .mono { font-family: var(--mono); font-size: 12px; }
   .map-marker::after { content: ''; position: absolute; inset: -12px; } /* 48px hit area */
 }
 .nowrap { white-space: nowrap; }
+
+/* Theme toggle */
+.icon-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 38px; height: 38px; padding: 0; border-radius: 8px;
+  border: 1px solid var(--line); background: var(--surface); color: var(--text); cursor: pointer;
+}
+.icon-btn:hover { background: var(--surface-2); }
+.icon-btn svg { width: 18px; height: 18px; }
+@media (pointer: coarse), (max-width: 720px) { .icon-btn { width: 44px; height: 44px; } }
+
+/* MapLibre controls follow the theme */
+.maplibregl-ctrl-group { background: var(--surface) !important; box-shadow: var(--shadow) !important; }
+.maplibregl-ctrl-group button + button { border-top-color: var(--line) !important; }
+.maplibregl-ctrl-icon { filter: var(--map-ctrl-icon); }
+.maplibregl-ctrl-attrib.maplibregl-compact,
+.maplibregl-ctrl-attrib { background: color-mix(in srgb, var(--surface) 88%, transparent) !important; color: var(--muted); }
+.maplibregl-ctrl-attrib a,
+.maplibregl-ctrl-attrib-inner { color: var(--muted) !important; }
+.maplibregl-ctrl-attrib-button { filter: var(--map-ctrl-icon); }

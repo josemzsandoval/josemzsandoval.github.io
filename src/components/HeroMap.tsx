@@ -5,6 +5,7 @@ import 'maplibre-gl/dist/maplibre-gl.css';
 // Let Vite bundle the worker and hand MapLibre the final URL.
 import workerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url';
 import { profile, type Job } from '../data/profile';
+import { getTheme, subscribeTheme } from '../theme';
 
 // Free vector tiles, no API key: https://openfreemap.org
 const STYLE_LIGHT = 'https://tiles.openfreemap.org/styles/positron';
@@ -50,14 +51,13 @@ export default function HeroMap() {
 
   useEffect(() => {
     if (!ref.current) return;
-    const darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const wide = window.matchMedia('(min-width: 821px)').matches;
     const places = groupByPlace(profile.jobs);
 
     const map = new maplibregl.Map({
       container: ref.current,
-      style: darkQuery.matches ? STYLE_DARK : STYLE_LIGHT,
+      style: getTheme() === 'dark' ? STYLE_DARK : STYLE_LIGHT,
       center: [-58, -19],
       zoom: 3,
       attributionControl: { compact: true },
@@ -80,7 +80,7 @@ export default function HeroMap() {
         type: 'line',
         source: 'career-path',
         paint: {
-          'line-color': darkQuery.matches ? '#4fc1b5' : '#0e7c74',
+          'line-color': getTheme() === 'dark' ? '#4fc1b5' : '#0e7c74',
           'line-width': 2,
           'line-dasharray': [2, 2],
           'line-opacity': 0.8,
@@ -88,8 +88,13 @@ export default function HeroMap() {
       });
     });
 
-    const onThemeChange = () => map.setStyle(darkQuery.matches ? STYLE_DARK : STYLE_LIGHT);
-    darkQuery.addEventListener('change', onThemeChange);
+    let currentStyle = getTheme();
+    const unsubscribeTheme = subscribeTheme(() => {
+      const theme = getTheme();
+      if (theme === currentStyle) return;
+      currentStyle = theme;
+      map.setStyle(theme === 'dark' ? STYLE_DARK : STYLE_LIGHT);
+    });
 
     // Markers are DOM elements, so they survive style changes.
     for (const place of places) {
@@ -111,7 +116,7 @@ export default function HeroMap() {
     map.once('load', () => map.fitBounds(bounds, { padding, maxZoom: 5.2, duration: reduceMotion ? 0 : 2400 }));
 
     return () => {
-      darkQuery.removeEventListener('change', onThemeChange);
+      unsubscribeTheme();
       map.remove();
     };
   }, []);

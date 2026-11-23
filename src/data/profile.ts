@@ -39,7 +39,7 @@ export const profile = {
     { value: '40%', label: 'faster GPS rendering with deck.gl' },
   ],
   summary: [
-    'Senior GIS Solutions Architect and Full-Stack Software Engineer with 17 years of experience designing and implementing enterprise geospatial systems with both commercial and open-source technologies. I build scalable spatial architectures and Web GIS applications and integrate them into modern software platforms across energy, utilities, mining, telecommunications, and government.',
+    'Senior GIS Solutions Architect and Full-Stack Software Engineer with 17 years of experience designing and implementing enterprise geospatial systems with both commercial and open-source technologies. Proven track record building scalable spatial architectures and Web GIS applications and integrating them into modern software platforms across energy, utilities, mining, telecommunications, and government.',
     'Extensive experience designing ArcGIS Enterprise architectures, spatial data models, and automated geospatial workflows using ArcPy and open-source libraries such as GeoPandas, Shapely, GDAL, and Rasterio, as well as geospatial ETL pipelines and spatial databases. Experienced in integrating GIS services, APIs, and cloud infrastructure to support high-performance geospatial applications.',
     'Currently a Full-Stack C# GIS Developer at Upstart13, building .NET MAUI mobile mapping features with MapLibre, tuning GeoServer infrastructure, and guiding clients toward GPU-accelerated visualization with deck.gl.',
   ],

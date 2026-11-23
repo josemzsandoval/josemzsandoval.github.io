@@ -15,7 +15,16 @@
     <meta property="og:image:alt" content="Jose Miguel Zambrana Sandoval, Geospatial Software Engineer and Solution Architect" />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="canonical" href="https://josemzsandoval.github.io/" />
-    <meta name="theme-color" content="#0f1b1e" />
+    <meta name="theme-color" content="#f6f5f1" />
+    <script>
+      // Apply a saved theme choice before first paint (no flash). See src/theme.ts.
+      try {
+        var t = localStorage.getItem('theme');
+        if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+        var dark = t ? t === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+        document.querySelector('meta[name="theme-color"]').setAttribute('content', dark ? '#0f1b1e' : '#f6f5f1');
+      } catch (e) {}
+    </script>
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
