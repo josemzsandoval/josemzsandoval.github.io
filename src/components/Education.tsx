@@ -3,7 +3,7 @@ import { profile } from '../data/profile';
 
 export function Education() {
   return (
-    <Section id="education" eyebrow="04 · Education" title="Education, certifications & languages">
+    <Section id="education" eyebrow="05 · Education" title="Education, certifications & languages">
       <div className="edu">
         <div>
           <h3>Education</h3>

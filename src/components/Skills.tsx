@@ -3,7 +3,7 @@ import { profile } from '../data/profile';
 
 export function Skills() {
   return (
-    <Section id="skills" eyebrow="03 · Skills" title="Toolbox">
+    <Section id="skills" eyebrow="04 · Skills" title="Toolbox">
       <div className="skills">
         {profile.skills.map((g) => (
           <div className="skill-card" key={g.name}>

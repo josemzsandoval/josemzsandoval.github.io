@@ -1,5 +1,6 @@
-import { lazy, Suspense, useEffect, useRef, useState } from 'react';
+import { lazy, Suspense, useRef } from 'react';
 import { profile } from '../data/profile';
+import { useNearViewport } from '../useNearViewport';
 
 // MapLibre is ~800 KB; load it in a separate chunk so text paints first.
 const HeroMap = lazy(() => import('./HeroMap'));
@@ -8,16 +9,7 @@ export function Hero() {
   // Only fetch MapLibre once the map area is near the viewport
   // (on phones the map sits below the fold).
   const mapRef = useRef<HTMLDivElement>(null);
-  const [showMap, setShowMap] = useState(false);
-  useEffect(() => {
-    const el = mapRef.current;
-    if (!el) return;
-    const io = new IntersectionObserver(([e]) => {
-      if (e.isIntersecting) { setShowMap(true); io.disconnect(); }
-    }, { rootMargin: '200px' });
-    io.observe(el);
-    return () => io.disconnect();
-  }, []);
+  const showMap = useNearViewport(mapRef);
 
   return (
     <section className="hero" id="top" aria-labelledby="hero-name">

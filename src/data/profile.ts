@@ -14,6 +14,12 @@ export interface Job {
   coords: [number, number];
 }
 
+export interface Country {
+  /** Natural Earth ADM0_A3 code; must exist in src/data/countries.geo.json */
+  code: string;
+  name: string;
+}
+
 export interface SkillGroup {
   name: string;
   items: string[];
@@ -153,6 +159,23 @@ export const profile = {
       coords: [-63.1812, -17.7834],
     },
   ] satisfies Job[],
+  // "Global reach" map. Adding a country? Also add its code to scripts/build-countries.mjs and re-run it.
+  clientCountries: [
+    { code: 'BRA', name: 'Brazil' },
+    { code: 'BOL', name: 'Bolivia' },
+    { code: 'USA', name: 'United States' },
+    { code: 'PRT', name: 'Portugal' },
+    { code: 'ARE', name: 'United Arab Emirates' },
+  ] satisfies Country[],
+  teamCountries: [
+    { code: 'BOL', name: 'Bolivia' },
+    { code: 'BRA', name: 'Brazil' },
+    { code: 'PRT', name: 'Portugal' },
+    { code: 'FRA', name: 'France' },
+    { code: 'MEX', name: 'Mexico' },
+    { code: 'USA', name: 'United States' },
+    { code: 'ARE', name: 'United Arab Emirates' },
+  ] satisfies Country[],
   skills: [
     {
       name: 'Languages & Frameworks',

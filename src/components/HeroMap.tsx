@@ -1,17 +1,7 @@
 import { useEffect, useRef } from 'react';
-import * as maplibregl from 'maplibre-gl';
-import 'maplibre-gl/dist/maplibre-gl.css';
-// MapLibre resolves its worker relative to its own module URL, which breaks once bundled.
-// Let Vite bundle the worker and hand MapLibre the final URL.
-import workerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url';
+import { maplibregl, styleFor, accentFor } from './mapSetup';
 import { profile, type Job } from '../data/profile';
 import { getTheme, subscribeTheme } from '../theme';
-
-// Free vector tiles, no API key: https://openfreemap.org
-const STYLE_LIGHT = 'https://tiles.openfreemap.org/styles/positron';
-const STYLE_DARK = 'https://tiles.openfreemap.org/styles/dark';
-
-maplibregl.setWorkerUrl(workerUrl);
 
 interface Place {
   coords: [number, number];
@@ -57,7 +47,7 @@ export default function HeroMap() {
 
     const map = new maplibregl.Map({
       container: ref.current,
-      style: getTheme() === 'dark' ? STYLE_DARK : STYLE_LIGHT,
+      style: styleFor(getTheme()),
       center: [-58, -19],
       zoom: 3,
       attributionControl: { compact: true },
@@ -80,7 +70,7 @@ export default function HeroMap() {
         type: 'line',
         source: 'career-path',
         paint: {
-          'line-color': getTheme() === 'dark' ? '#4fc1b5' : '#0e7c74',
+          'line-color': accentFor(getTheme()),
           'line-width': 2,
           'line-dasharray': [2, 2],
           'line-opacity': 0.8,
@@ -93,7 +83,7 @@ export default function HeroMap() {
       const theme = getTheme();
       if (theme === currentStyle) return;
       currentStyle = theme;
-      map.setStyle(theme === 'dark' ? STYLE_DARK : STYLE_LIGHT);
+      map.setStyle(styleFor(theme));
     });
 
     // Markers are DOM elements, so they survive style changes.

@@ -5,6 +5,7 @@ import { ThemeToggle } from './ThemeToggle';
 const links = [
   { id: 'about', label: 'About' },
   { id: 'experience', label: 'Experience' },
+  { id: 'reach', label: 'Reach' },
   { id: 'skills', label: 'Skills' },
   { id: 'education', label: 'Education' },
   { id: 'contact', label: 'Contact' },

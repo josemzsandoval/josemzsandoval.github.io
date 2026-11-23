@@ -222,6 +222,24 @@ section.block { padding: 88px 0; border-bottom: 1px solid var(--line); }
 .more-toggle { margin-top: 8px; }
 @media (max-width: 600px) { .job { padding-left: 30px; } }
 
+/* Global reach */
+.reach-toggle { display: inline-flex; gap: 4px; padding: 4px; margin: 0 0 16px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+.reach-toggle .btn { color: var(--muted); background: transparent; }
+.reach-toggle .btn .mono { font-family: var(--mono); font-weight: 400; font-size: 13px; }
+.reach-toggle .btn[aria-pressed='true'] { background: var(--accent); color: var(--accent-ink); }
+.reach-toggle .btn[aria-pressed='true'] .mono { color: inherit; opacity: 0.85; }
+.reach-map { position: relative; height: 440px; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; background: var(--surface-2); }
+.reach-map .maplibregl-map { position: absolute; inset: 0; }
+.reach-dot {
+  width: 10px; height: 10px; border-radius: 50%; background: var(--accent);
+  border: 2px solid var(--surface);
+}
+.reach-dot[hidden] { display: none; }
+.reach-intro { color: var(--muted); font-size: 15px; margin: 20px 0 10px; }
+.reach-chips { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; margin: 0; padding: 0; }
+.reach-chips li { font-size: 14px; padding: 5px 12px; border-radius: 999px; background: color-mix(in srgb, var(--accent) 12%, transparent); color: var(--text); border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent); }
+@media (max-width: 600px) { .reach-map { height: 340px; } }
+
 /* Skills */
 .skills { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
 .skill-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px 22px; }
