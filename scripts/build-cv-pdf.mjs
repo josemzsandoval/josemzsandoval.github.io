@@ -12,7 +12,8 @@ try {
   const page = await browser.newPage();
   await page.goto('http://localhost:4179/cv.html', { waitUntil: 'networkidle' });
   await page.evaluate(() => document.fonts.ready);
-  await page.pdf({ path: OUT, format: 'A4', printBackground: true, preferCSSPageSize: true });
+  // tagged + outline: structured, machine-readable PDF that ATS parsers extract cleanly
+  await page.pdf({ path: OUT, format: 'A4', printBackground: true, preferCSSPageSize: true, tagged: true, outline: true });
   console.log(`✔ Wrote ${OUT}`);
 } finally {
   await browser.close();
