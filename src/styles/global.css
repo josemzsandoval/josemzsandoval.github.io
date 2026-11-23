@@ -163,6 +163,20 @@ a:hover { text-decoration-thickness: 2px; }
   box-shadow: 0 0 0 6px color-mix(in srgb, var(--marker) 30%, transparent);
   cursor: pointer; padding: 0;
 }
+/* Current location: expanding ring ("you are here"). Transform/opacity only. */
+.map-marker--current { position: relative; }
+.map-marker--current::before {
+  content: ''; position: absolute; inset: -5px; border-radius: 50%;
+  border: 2px solid var(--marker); pointer-events: none;
+  animation: marker-pulse 1.8s cubic-bezier(0.2, 0.6, 0.35, 1) infinite;
+}
+@keyframes marker-pulse {
+  0% { transform: scale(0.8); opacity: 0.9; }
+  100% { transform: scale(2.6); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .map-marker--current::before { animation: none; transform: scale(1.6); opacity: 0.5; }
+}
 .maplibregl-popup-content { background: var(--surface) !important; color: var(--text); border-radius: 10px !important; box-shadow: var(--shadow) !important; font-family: var(--sans); padding: 12px 14px !important; }
 .maplibregl-popup-tip { border-top-color: var(--surface) !important; border-bottom-color: var(--surface) !important; }
 .maplibregl-popup-close-button { color: var(--muted); font-size: 18px; }

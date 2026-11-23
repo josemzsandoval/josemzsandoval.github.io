@@ -100,8 +100,9 @@ export default function HeroMap() {
     for (const place of places) {
       const el = document.createElement('button');
       el.type = 'button';
-      el.className = 'map-marker';
-      el.setAttribute('aria-label', `${place.label}: ${place.jobs.map((j) => j.company).join(', ')}`);
+      const isCurrent = place.jobs.some((j) => j.current);
+      el.className = isCurrent ? 'map-marker map-marker--current' : 'map-marker';
+      el.setAttribute('aria-label', `${isCurrent ? 'Current location, ' : ''}${place.label}: ${place.jobs.map((j) => j.company).join(', ')}`);
       new maplibregl.Marker({ element: el })
         .setLngLat(place.coords)
         .setPopup(new maplibregl.Popup({ offset: 16, closeButton: true }).setDOMContent(popupNode(place)))
