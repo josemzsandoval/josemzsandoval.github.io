@@ -31,7 +31,7 @@ export function Hero() {
       <div className="hero-scrim" />
       <div className="container hero-content">
         <p className="coords">
-          <b>●</b> 23.18°S 45.89°W · 17.78°S 63.18°W · {profile.location}
+          <b>●</b> 23.18°S 45.89°W · 17.78°S 63.18°W · <span className="nowrap">{profile.location}</span>
         </p>
         <h1 id="hero-name">{profile.name}</h1>
         <p className="role">{profile.shortTitle}</p>

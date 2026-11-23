@@ -26,7 +26,7 @@ export const profile = {
     'Geospatial Software Engineer & Solution Architect | GIS Technical Lead | Full-Stack GIS Development | MapLibre | Python, FastAPI, C# | PostGIS, ArcGIS Enterprise, GeoServer | AI-Assisted Development (Claude, Cursor)',
   tagline:
     'I build geospatial platforms that stay fast when the data gets big, from enterprise ArcGIS architectures to MapLibre mobile apps rendering hundreds of thousands of features.',
-  location: 'Brazil – Bolivia · Remote',
+  location: 'São José dos Campos, Brazil · Remote',
   contact: {
     email: 'jmiguelzambrana@gmail.com',
     phone: '+55 67 99132-3903', // printed CV only; not shown on the website
