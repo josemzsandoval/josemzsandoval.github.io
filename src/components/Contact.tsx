@@ -1,12 +1,13 @@
 import { Section } from './Section';
-import { profile } from '../data/profile';
+import { site, t } from '../i18n';
 
 export function Contact() {
-  const { email, linkedin, github } = profile.contact;
+  const { email, linkedin, github } = site.contact;
+  const ui = t.ui.contact;
   return (
-    <Section id="contact" eyebrow="06 · Contact" title="Let’s build something on the map">
+    <Section id="contact" eyebrow={ui.eyebrow} title={ui.title}>
       <div className="contact">
-        <p>Open to GIS engineering, geospatial architecture, and technical lead roles, remote or hybrid. The fastest way to reach me is email.</p>
+        <p>{ui.body}</p>
         <div className="hero-actions">
           <a className="btn btn-primary" href={`mailto:${email}`}>{email}</a>
           <a className="btn btn-ghost" href={linkedin} target="_blank" rel="noreferrer">LinkedIn</a>

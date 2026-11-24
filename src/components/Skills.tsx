@@ -1,11 +1,11 @@
 import { Section } from './Section';
-import { profile } from '../data/profile';
+import { site, t } from '../i18n';
 
 export function Skills() {
   return (
-    <Section id="skills" eyebrow="04 · Skills" title="Toolbox">
+    <Section id="skills" eyebrow={t.ui.skills.eyebrow} title={t.ui.skills.title}>
       <div className="skills">
-        {profile.skills.map((g) => (
+        {site.skills.map((g) => (
           <div className="skill-card" key={g.name}>
             <h3>{g.name}</h3>
             <ul className="tags">

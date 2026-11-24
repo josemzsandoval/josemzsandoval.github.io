@@ -1,7 +1,9 @@
 import { useEffect, useRef } from 'react';
-import { maplibregl, styleFor, accentFor } from './mapSetup';
-import { profile, type Job } from '../data/profile';
+import { maplibregl, styleFor, accentFor, mapLocale } from './mapSetup';
+import { site, t, type SiteJob } from '../i18n';
 import { getTheme, subscribeTheme } from '../theme';
+
+type Job = SiteJob;
 
 interface Place {
   coords: [number, number];
@@ -13,7 +15,8 @@ function groupByPlace(jobs: Job[]): Place[] {
   const byKey = new Map<string, Place>();
   for (const job of jobs) {
     const key = job.coords.join(',');
-    const place = byKey.get(key) ?? { coords: job.coords, label: job.location === 'Remote' ? 'São José dos Campos, Brazil · Remote' : job.location, jobs: [] };
+    // `remote` comes from the English data, so it works in every language.
+    const place = byKey.get(key) ?? { coords: job.coords, label: job.remote ? site.location : job.location, jobs: [] };
     place.jobs.push(job);
     byKey.set(key, place);
   }
@@ -43,11 +46,12 @@ export default function HeroMap() {
     if (!ref.current) return;
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const wide = window.matchMedia('(min-width: 821px)').matches;
-    const places = groupByPlace(profile.jobs);
+    const places = groupByPlace(site.jobs);
 
     const map = new maplibregl.Map({
       container: ref.current,
       style: styleFor(getTheme()),
+      locale: mapLocale,
       center: [-58, -19],
       zoom: 3,
       attributionControl: { compact: true },
@@ -92,7 +96,7 @@ export default function HeroMap() {
       el.type = 'button';
       const isCurrent = place.jobs.some((j) => j.current);
       el.className = isCurrent ? 'map-marker map-marker--current' : 'map-marker';
-      el.setAttribute('aria-label', `${isCurrent ? 'Current location, ' : ''}${place.label}: ${place.jobs.map((j) => j.company).join(', ')}`);
+      el.setAttribute('aria-label', `${isCurrent ? `${t.ui.map.currentLocation}, ` : ''}${place.label}: ${place.jobs.map((j) => j.company).join(', ')}`);
       new maplibregl.Marker({ element: el })
         .setLngLat(place.coords)
         .setPopup(new maplibregl.Popup({ offset: 16, closeButton: true }).setDOMContent(popupNode(place)))
@@ -112,5 +116,5 @@ export default function HeroMap() {
     };
   }, []);
 
-  return <div ref={ref} style={{ position: 'absolute', inset: 0 }} role="region" aria-label="Map of places Jose has worked" />;
+  return <div ref={ref} style={{ position: 'absolute', inset: 0 }} role="region" aria-label={t.ui.map.heroLabel} />;
 }

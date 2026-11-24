@@ -1,14 +1,15 @@
 import { lazy, Suspense, useRef, useState } from 'react';
 import { Section } from './Section';
-import { profile } from '../data/profile';
+import { site, t } from '../i18n';
 import { useNearViewport } from '../useNearViewport';
 
 // Shares the MapLibre chunk with the hero map; loaded only when scrolled near.
 const ReachMap = lazy(() => import('./ReachMap'));
 
+const ui = t.ui.reach;
 const MODES = {
-  clients: { label: 'Clients', intro: 'Countries where I’ve delivered work for clients', list: profile.clientCountries },
-  teams: { label: 'Teams', intro: 'Countries my teammates have worked from', list: profile.teamCountries },
+  clients: { label: ui.clients, intro: ui.clientsIntro, list: site.clientCountries },
+  teams: { label: ui.teams, intro: ui.teamsIntro, list: site.teamCountries },
 } as const;
 type Mode = keyof typeof MODES;
 
@@ -21,8 +22,8 @@ export function Reach() {
   const names = active.list.map((c) => c.name).join(', ');
 
   return (
-    <Section id="reach" eyebrow="03 · Global reach" title="Clients and teams across four continents">
-      <div className="reach-toggle" role="group" aria-label="Show countries for">
+    <Section id="reach" eyebrow={ui.eyebrow} title={ui.title}>
+      <div className="reach-toggle" role="group" aria-label={ui.groupLabel}>
         {(Object.keys(MODES) as Mode[]).map((m) => (
           <button key={m} type="button" className="btn btn-sm" aria-pressed={mode === m} onClick={() => setMode(m)}>
             {MODES[m].label} <span className="mono">({MODES[m].list.length})</span>
@@ -32,7 +33,7 @@ export function Reach() {
       <div className="reach-map" ref={mapRef}>
         {showMap && (
           <Suspense fallback={null}>
-            <ReachMap codes={codes} label={`Map highlighting ${names}`} />
+            <ReachMap codes={codes} label={ui.mapLabel(names)} />
           </Suspense>
         )}
       </div>

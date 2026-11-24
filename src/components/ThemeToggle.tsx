@@ -1,4 +1,5 @@
 import { setTheme, useTheme } from '../theme';
+import { t } from '../i18n';
 
 const Sun = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
@@ -21,8 +22,8 @@ export function ThemeToggle() {
       type="button"
       className="icon-btn"
       onClick={() => setTheme(next)}
-      aria-label={`Switch to ${next} theme`}
-      title={`Switch to ${next} theme`}
+      aria-label={t.ui.themeSwitch(next)}
+      title={t.ui.themeSwitch(next)}
     >
       {theme === 'dark' ? <Sun /> : <Moon />}
     </button>

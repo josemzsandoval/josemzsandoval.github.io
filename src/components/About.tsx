@@ -1,23 +1,24 @@
 import { Section } from './Section';
-import { profile } from '../data/profile';
+import { site, t } from '../i18n';
 
 export function About() {
-  const current = profile.jobs[0];
+  const current = site.jobs[0];
+  const ui = t.ui.about;
   return (
-    <Section id="about" eyebrow="01 · About" title="Spatial systems that scale">
+    <Section id="about" eyebrow={ui.eyebrow} title={ui.title}>
       <div className="about">
         <div>
-          {profile.summary.map((p) => (
+          {site.summary.map((p) => (
             <p key={p.slice(0, 24)}>{p}</p>
           ))}
         </div>
         <aside>
-          <h3>At a glance</h3>
+          <h3>{ui.atAGlance}</h3>
           <dl>
-            <div><dt>Currently</dt><dd>{current.title} · {current.company}</dd></div>
-            <div><dt>Based in</dt><dd>{profile.location}</dd></div>
-            <div><dt>Languages</dt><dd>{profile.languages.map((l) => l.name).join(' · ')}</dd></div>
-            <div><dt>Focus</dt><dd>MapLibre · PostGIS · ArcGIS Enterprise · GeoServer · Python · C#</dd></div>
+            <div><dt>{ui.currently}</dt><dd>{current.title} · {current.company}</dd></div>
+            <div><dt>{ui.basedIn}</dt><dd>{site.location}</dd></div>
+            <div><dt>{ui.languages}</dt><dd>{site.languages.map((l) => l.name).join(' · ')}</dd></div>
+            <div><dt>{ui.focus}</dt><dd>MapLibre · PostGIS · ArcGIS Enterprise · GeoServer · Python · C#</dd></div>
           </dl>
         </aside>
       </div>

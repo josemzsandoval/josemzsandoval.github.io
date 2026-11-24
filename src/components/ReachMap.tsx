@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import type { FeatureCollection } from 'geojson';
-import { maplibregl, styleFor, accentFor } from './mapSetup';
+import { maplibregl, styleFor, accentFor, mapLocale } from './mapSetup';
 import countries from '../data/countries.geo.json';
 import { getTheme, subscribeTheme } from '../theme';
 
@@ -44,6 +44,7 @@ export default function ReachMap({ codes, label }: { codes: string[]; label: str
     const map = new maplibregl.Map({
       container: ref.current,
       style: styleFor(getTheme()),
+      locale: mapLocale,
       bounds: BOUNDS,
       fitBoundsOptions: { padding: wide ? 32 : 20 },
       attributionControl: { compact: true },

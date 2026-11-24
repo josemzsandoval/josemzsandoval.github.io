@@ -97,7 +97,7 @@ a:hover { text-decoration-thickness: 2px; }
 .brand { font-family: var(--mono); font-weight: 500; font-size: 15px; color: var(--text); text-decoration: none; white-space: nowrap; }
 .brand span { color: var(--marker); }
 .nav ul { display: flex; gap: 22px; list-style: none; margin: 0; padding: 0; }
-.nav ul a { color: var(--muted); text-decoration: none; font-size: 15px; }
+.nav ul a { color: var(--muted); text-decoration: none; font-size: 15px; white-space: nowrap; }
 .nav ul a:hover { color: var(--text); }
 .nav ul a[aria-current='location'] { color: var(--text); font-weight: 600; box-shadow: inset 0 -2px 0 var(--accent); padding-bottom: 4px; }
 .nav-right { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
@@ -105,8 +105,9 @@ a:hover { text-decoration-thickness: 2px; }
 @media (max-width: 420px) { .hide-sm { display: none; } }
 @media (max-width: 360px) { .nav-right > .hide-xs { display: none; } } /* hero has its own Download CV button */
 .nav .menu-btn { display: none; }
-@media (max-width: 720px) {
-  .nav ul { display: none; }
+/* Collapse section links into the Menu button below 980px: the ES/PT labels plus the language switcher need the room. */
+@media (max-width: 980px) {
+  .nav nav > ul { display: none; } /* section links only; not the language switcher */
   .nav .menu-btn { display: inline-flex; }
   .nav ul.open {
     display: flex; flex-direction: column; gap: 0;
@@ -272,6 +273,24 @@ footer .mono { font-family: var(--mono); font-size: 12px; }
   .map-marker::after { content: ''; position: absolute; inset: -12px; } /* 48px hit area */
 }
 .nowrap { white-space: nowrap; }
+
+/* Language switcher (inline in the nav; inside the menu on phones) */
+.lang-switch { display: flex; gap: 2px; list-style: none; margin: 0; padding: 2px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
+.nav ul.lang-switch { gap: 2px; }
+.nav .lang-switch a {
+  display: inline-flex; align-items: center; justify-content: center; min-width: 32px; height: 32px; padding: 0 6px;
+  border-radius: 6px; font-family: var(--mono); font-size: 12px; color: var(--muted); text-decoration: none;
+}
+.nav .lang-switch a:hover { color: var(--text); background: var(--surface-2); }
+.nav .lang-switch a[aria-current='true'] { background: var(--accent); color: var(--accent-ink); }
+.nav-lang-mobile { display: none; }
+@media (max-width: 720px) {
+  .nav-right > .hide-mobile { display: none; }
+  .nav ul.open .nav-lang-mobile { display: block; padding: 10px 0 4px; }
+  .nav ul.open .lang-switch { display: inline-flex; flex-direction: row; position: static; box-shadow: none; padding: 2px; }
+  .nav ul.open .lang-switch a { min-height: 44px; min-width: 52px; font-size: 14px; color: var(--muted); }
+  .nav ul.open .lang-switch a[aria-current='true'] { color: var(--accent-ink); }
+}
 
 /* Theme toggle */
 .icon-btn {

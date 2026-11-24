@@ -6,12 +6,12 @@ import { Skills } from './components/Skills';
 import { Education } from './components/Education';
 import { Contact } from './components/Contact';
 import { Nav } from './components/Nav';
-import { profile } from './data/profile';
+import { site, t } from './i18n';
 
 export default function App() {
   return (
     <>
-      <a className="skip-link" href="#main">Skip to content</a>
+      <a className="skip-link" href="#main">{t.ui.skipLink}</a>
       <Nav />
       <main id="main">
         <Hero />
@@ -24,8 +24,8 @@ export default function App() {
       </main>
       <footer>
         <div className="container">
-          <span>© {new Date().getFullYear()} {profile.name}</span>
-          <span className="mono">Built with React · MapLibre GL · GitHub Pages</span>
+          <span>© {new Date().getFullYear()} {site.name}</span>
+          <span className="mono">{t.ui.footer.builtWith}</span>
         </div>
       </footer>
     </>

@@ -1,5 +1,5 @@
 import { lazy, Suspense, useRef } from 'react';
-import { profile } from '../data/profile';
+import { site as profile, t } from '../i18n';
 import { useNearViewport } from '../useNearViewport';
 
 // MapLibre is ~800 KB; load it in a separate chunk so text paints first.
@@ -29,8 +29,8 @@ export function Hero() {
         <p className="role">{profile.shortTitle}</p>
         <p className="lede">{profile.tagline}</p>
         <div className="hero-actions">
-          <a className="btn btn-primary" href="#contact">Get in touch</a>
-          <a className="btn btn-ghost" href={profile.cvPdf} download>Download CV (PDF)</a>
+          <a className="btn btn-primary" href="#contact">{t.ui.hero.getInTouch}</a>
+          <a className="btn btn-ghost" href={profile.cvPdf} download>{t.ui.hero.downloadCv}</a>
         </div>
         <ul className="stats">
           {profile.stats.map((s) => (

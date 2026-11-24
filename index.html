@@ -1,4 +1,6 @@
 <!doctype html>
+<!-- One of three language entry pages: index.html (en), es/index.html, pt-br/index.html.
+     Keep their <head> in sync (theme script, fonts, hreflang list, JSON-LD; also public/sitemap.xml); only the text, lang, canonical and og:url differ. -->
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -13,8 +15,57 @@
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="Jose Miguel Zambrana Sandoval, Geospatial Software Engineer and Solution Architect" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:locale:alternate" content="es_LA" />
+    <meta property="og:locale:alternate" content="pt_BR" />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="canonical" href="https://josemzsandoval.github.io/" />
+    <link rel="alternate" hreflang="en" href="https://josemzsandoval.github.io/" />
+    <link rel="alternate" hreflang="es" href="https://josemzsandoval.github.io/es/" />
+    <link rel="alternate" hreflang="pt-BR" href="https://josemzsandoval.github.io/pt-br/" />
+    <link rel="alternate" hreflang="x-default" href="https://josemzsandoval.github.io/" />
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfilePage",
+      "url": "https://josemzsandoval.github.io/",
+      "inLanguage": "en",
+      "mainEntity": {
+        "@type": "Person",
+        "name": "Jose Miguel Zambrana Sandoval",
+        "jobTitle": "Geospatial Software Engineer & Solution Architect",
+        "url": "https://josemzsandoval.github.io/",
+        "image": "https://josemzsandoval.github.io/og.png",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "São José dos Campos",
+          "addressCountry": "BR"
+        },
+        "knowsLanguage": [
+          "English",
+          "Spanish",
+          "Portuguese"
+        ],
+        "knowsAbout": [
+          "GIS",
+          "Geospatial software",
+          "MapLibre",
+          "PostGIS",
+          "ArcGIS Enterprise",
+          "GeoServer",
+          "Python",
+          "FastAPI",
+          "C#",
+          ".NET MAUI",
+          "deck.gl"
+        ],
+        "sameAs": [
+          "https://www.linkedin.com/in/jose-miguel-zambrana/",
+          "https://github.com/josemzsandoval"
+        ]
+      }
+    }
+    </script>
     <meta name="theme-color" content="#f6f5f1" />
     <script>
       // Apply a saved theme choice before first paint (no flash). See src/theme.ts.

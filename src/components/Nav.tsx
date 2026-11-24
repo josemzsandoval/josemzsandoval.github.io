@@ -1,14 +1,16 @@
 import { useEffect, useRef, useState } from 'react';
-import { profile } from '../data/profile';
+import { site, t } from '../i18n';
 import { ThemeToggle } from './ThemeToggle';
+import { LanguageSwitcher } from './LanguageSwitcher';
 
+// Section ids stay in English in every language, so #anchors survive a language switch.
 const links = [
-  { id: 'about', label: 'About' },
-  { id: 'experience', label: 'Experience' },
-  { id: 'reach', label: 'Reach' },
-  { id: 'skills', label: 'Skills' },
-  { id: 'education', label: 'Education' },
-  { id: 'contact', label: 'Contact' },
+  { id: 'about', label: t.ui.nav.about },
+  { id: 'experience', label: t.ui.nav.experience },
+  { id: 'reach', label: t.ui.nav.reach },
+  { id: 'skills', label: t.ui.nav.skills },
+  { id: 'education', label: t.ui.nav.education },
+  { id: 'contact', label: t.ui.nav.contact },
 ];
 
 export function Nav() {
@@ -45,7 +47,7 @@ export function Nav() {
     <header className="nav">
       <div className="container">
         <a className="brand" href="#top">jose<span>.</span>zambrana</a>
-        <nav aria-label="Primary">
+        <nav aria-label={t.ui.navLabel}>
           <ul id="primary-nav" className={open ? 'open' : undefined}>
             {links.map((l) => (
               <li key={l.id}>
@@ -54,12 +56,16 @@ export function Nav() {
                 </a>
               </li>
             ))}
+            <li className="nav-lang-mobile">
+              <LanguageSwitcher />
+            </li>
           </ul>
         </nav>
         <div className="nav-right">
+          <LanguageSwitcher className="hide-mobile" />
           <ThemeToggle />
-          <a className="btn btn-primary btn-sm hide-xs" href={profile.cvPdf} download aria-label="Download CV">
-            <span className="hide-sm">Download&nbsp;</span>CV
+          <a className="btn btn-primary btn-sm hide-xs" href={site.cvPdf} download aria-label={t.ui.cvButtonLabel}>
+            <span className="hide-sm">{t.ui.cvButtonPrefix}&nbsp;</span>CV
           </a>
           <button
             ref={btnRef}
@@ -69,7 +75,7 @@ export function Nav() {
             aria-controls="primary-nav"
             onClick={() => setOpen(!open)}
           >
-            {open ? 'Close' : 'Menu'}
+            {open ? t.ui.close : t.ui.menu}
           </button>
         </div>
       </div>
